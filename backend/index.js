@@ -15,9 +15,9 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }))
 
-app.use("/api/auth", authRoute)
-app.use("/api/productos", productoRoute)
-app.use("/api/checkouts", checkoutRoute)
+app.use("/auth", authRoute)
+app.use("/productos", productoRoute)
+app.use("/checkouts", checkoutRoute)
 
 app.use((_, res) => {
   res.status(404).json({ error: "Not Found" })

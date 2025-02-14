@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // src/App.jsx
 import { Route, Routes, Navigate, useNavigate, useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
@@ -25,10 +26,6 @@ function App() {
   useEffect(() => {
     fetchProductos()
   }, [])
-
-  // await fetch("http://localhost:5000/api/productos"  ) 
-
-
 
   const fetchProductos = async () => {
     try {
