@@ -14,22 +14,20 @@ import productoRoute from './src/routes/producto.route.js'
 const app = express()
 
 app.use(express.json())
-app.use(
-  cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-)
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}))
 
 app.use('/auth', authRoute)
 app.use('/productos', productoRoute)
 app.use('/checkouts', checkoutRoute)
 
-app.use(express.static(path.join(__dirname, 'build'), { fallthrough: true }))
+app.use(express.static(path.join(__dirname, '../frontend/build')))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'))
 })
 
 const PORT = process.env.PORT || 5000
