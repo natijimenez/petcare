@@ -26,10 +26,13 @@ app.use('/auth', authRoute)
 app.use('/productos', productoRoute)
 app.use('/checkouts', checkoutRoute)
 
-const buildPath = path.join(process.cwd(), 'frontend', 'build')
+const buildPath = path.join(process.cwd(), 'build')
+console.log('📂 Static files path:', buildPath)
+
 app.use(express.static(buildPath))
 
 app.get('*', (req, res) => {
+  console.log('🔄 Redirigiendo ruta:', req.url)
   res.sendFile(path.join(buildPath, 'index.html'))
 })
 
