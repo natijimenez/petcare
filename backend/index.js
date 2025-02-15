@@ -14,11 +14,13 @@ import productoRoute from './src/routes/producto.route.js'
 const app = express()
 
 app.use(express.json())
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}))
+app.use(
+  cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+)
 
 app.use('/auth', authRoute)
 app.use('/productos', productoRoute)
@@ -26,7 +28,6 @@ app.use('/checkouts', checkoutRoute)
 
 const buildPath = path.join(process.cwd(), 'frontend', 'build')
 app.use(express.static(buildPath))
-
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'))
