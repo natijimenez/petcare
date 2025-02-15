@@ -1,7 +1,11 @@
-
 import express from "express"
 import cors from "cors"
-import "dotenv/config"
+import "dotenv/config";
+import { fileURLToPath } from "url"
+import path from "path"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 import authRoute from "./src/routes/auth.route.js"
 import checkoutRoute from "./src/routes/checkout.route.js"
@@ -21,6 +25,12 @@ app.use(
 app.use("/auth", authRoute)
 app.use("/productos", productoRoute)
 app.use("/checkouts", checkoutRoute)
+
+app.use(express.static(path.join(__dirname, "build")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+})
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
